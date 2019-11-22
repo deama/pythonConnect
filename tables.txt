@@ -1,0 +1,25 @@
+CREATE TABLE account (
+account_id INT(32) UNSIGNED AUTO_INCREMENT PRIMARY KEY UNIQUE,
+first_name VARCHAR(44) NOT NULL,
+last_name VARCHAR(44) NOT NULL,
+balance decimal(32,2),
+register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE login(
+login_id INT(32) UNSIGNED AUTO_INCREMENT PRIMARY KEY UNIQUE,
+account_id INT(32) NOT NULL UNSIGNED UNIQUE,
+login VARCHAR(32) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL,
+FOREIGN KEY (account_id) REFERENCES account(account_id)
+);
+
+
+INSERT INTO account(first_name, last_name, balance) VALUES ('test', 'dock', 56.97 );
+INSERT INTO login(account_id, login, password) VALUES ( 1, 'test', 'password' );
+
+SELECT IFNULL( (SELECT field1 FROM table WHERE id = 123 LIMIT 1) ,'not found');
+
+
+UPDATE account SET balance = newBalance WHERE first_name = "BOB"
+
