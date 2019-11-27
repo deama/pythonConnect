@@ -1,0 +1,30 @@
+pipeline 
+{
+	agent any
+
+	stages 
+	{
+		stage("pip_install_virtualenv") 
+		{
+			steps 
+			{
+				sh "pip3 install virtualenv"
+			}
+		}
+		stage("setup_venv_and_activate") 
+		{
+			steps 
+			{
+				sh "sudo python3 ~/.local/lib/python3.6/site-packages/virtualenv.py venv"
+				sh ". ./venv/bin/activate"
+			}
+		}
+		stage("pip_install_requirements") 
+		{
+			steps 
+			{
+				sh "sudo pip3 install -r requirements.txt"
+			}
+		}
+	}
+}
